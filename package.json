@@ -1,10 +1,13 @@
 {
   "name": "moleculer-template-project-typescript",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Project template for Moleculer-based projects with typescript",
   "main": "meta.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "rimraf tmp && moleculer init . tmp",
+    "build": "moleculer init --answers test/demo/answers.json --install . tmp",
+    "test": "moleculer init --answers test/ci/answers.json --install . ci-test",
+    "start": "cd tmp && node node_modules/moleculer/bin/moleculer-runner services"
   },
   "repository": {
     "type": "git",
@@ -16,5 +19,17 @@
   "bugs": {
     "url": "https://github.com/moleculerjs/moleculer-template-project-typescript/issues"
   },
-  "homepage": "https://github.com/moleculerjs/moleculer-template-project-typescript#readme"
+  "homepage": "https://github.com/moleculerjs/moleculer-template-project-typescript#readme",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.20.0",
+    "@typescript-eslint/parser": "^2.20.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-prettier": "^3.1.2",
+    "moleculer-cli": "^0.7.0",
+    "prettier": "^1.19.1",
+    "rimraf": "^3.0.2",
+    "typescript": "^3.8.2"
+  }
 }

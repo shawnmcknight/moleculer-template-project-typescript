@@ -1,4 +1,3 @@
-"use strict";
 import { ServiceSchema } from "moleculer";
 
 const GreeterService: ServiceSchema = {
@@ -7,9 +6,7 @@ const GreeterService: ServiceSchema = {
 	/**
 	 * Service settings
 	 */
-	settings: {
-
-	},
+	settings: {},
 
 	/**
 	 * Service dependencies
@@ -20,7 +17,6 @@ const GreeterService: ServiceSchema = {
 	 * Actions
 	 */
 	actions: {
-
 		/**
 		 * Say a 'Hello'
 		 *
@@ -44,16 +40,13 @@ const GreeterService: ServiceSchema = {
 	/**
 	 * Events
 	 */
-	events: {
-
-	},
+	events: {},
 
 	/**
 	 * Methods
 	 */
-	methods: {
-
-	},
+	methods: {},
 };
 
-export = GreeterService;
+export default GreeterService;
+module.exports = GreeterService;
