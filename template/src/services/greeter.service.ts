@@ -1,15 +1,21 @@
-import { ServiceSchema } from "moleculer";
+"use strict";
 
-const GreeterService: ServiceSchema = {
+import { Context } from "moleculer";
+
+/**
+ * @typedef {import('moleculer').Context} Context Moleculer's Context
+ */
+
+module.exports = {
 	name: "greeter",
 
 	/**
-	 * Service settings
+	 * Settings
 	 */
 	settings: {},
 
 	/**
-	 * Service dependencies
+	 * Dependencies
 	 */
 	dependencies: [],
 
@@ -18,22 +24,34 @@ const GreeterService: ServiceSchema = {
 	 */
 	actions: {
 		/**
-		 * Say a 'Hello'
+		 * Say a 'Hello' action.
 		 *
 		 * @returns
 		 */
-		hello: () => "Hello Moleculer",
+		hello: {
+			rest: {
+				method: "GET",
+				path: "/hello",
+			},
+			async handler(): Promise<string> {
+				return "Hello Moleculer";
+			},
+		},
 
 		/**
-		 * Welcome a username
+		 * Welcome, a username
 		 *
 		 * @param {String} name - User name
 		 */
 		welcome: {
+			rest: "/welcome",
 			params: {
 				name: "string",
 			},
-			handler: ctx => `Welcome, ${ctx.params.name}`,
+			/** @param {Context} ctx  */
+			async handler(ctx: Context<{ name: string }>): Promise<string> {
+				return `Welcome, ${ctx.params.name}`;
+			},
 		},
 	},
 
@@ -46,7 +64,25 @@ const GreeterService: ServiceSchema = {
 	 * Methods
 	 */
 	methods: {},
-};
 
-export default GreeterService;
-module.exports = GreeterService;
+	/**
+	 * Service created lifecycle event handler
+	 */
+	created(): void {
+		// add any logic to run at service create time
+	},
+
+	/**
+	 * Service started lifecycle event handler
+	 */
+	async started(): Promise<void> {
+		// add any logic to run at service start time
+	},
+
+	/**
+	 * Service stopped lifecycle event handler
+	 */
+	async stopped(): Promise<void> {
+		// add any logic to run at service stop time
+	},
+};
